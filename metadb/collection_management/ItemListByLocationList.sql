@@ -1,4 +1,4 @@
---Derived/rewritten from https://github.com/culibraries/library-reporting/blob/main/metadb/report_queries/collection_development/CD100/CD100.sql
+--Derived/rewritten from https://github.com/cul-it/cul-folio-analytics/blob/main/metadb/canned_reports/MCR219B/shelf_list_inventory_brief.sql
 
 SELECT
 	ll.library_name,           
