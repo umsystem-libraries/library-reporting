@@ -1,3 +1,5 @@
+--Derived/rewritten from https://github.com/culibraries/library-reporting/blob/main/metadb/report_queries/collection_development/CD100/CD100.sql
+
 SELECT
 	ll.library_name,           
     itemext.effective_location_name,
