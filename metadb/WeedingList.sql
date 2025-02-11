@@ -61,4 +61,4 @@ loan_item_status,
 --loans_items.loan_due_date,
 --loans_items.loan_return_date,
 em.effective_shelving_order, 
---loan_renewals.num_loans;
+loan_renewals.num_loans;
