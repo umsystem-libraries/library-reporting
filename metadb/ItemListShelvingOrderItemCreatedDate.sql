@@ -1,5 +1,3 @@
-
-
 SELECT
 	i.item_id,
 	inst.instance_hrid AS instance_hrid,
@@ -21,8 +19,8 @@ SELECT
 	string_agg (DISTINCT ip.date_of_publication,' | ') AS date_publication,
 	string_agg (DISTINCT sub.subjects, ' | ') AS inst_subject,
 	loans_items.item_status AS loan_item_status,
-	loans_items.loan_due_date,
-	loans_items.loan_return_date,
+	--loans_items.loan_due_date,
+	--loans_items.loan_return_date,
 	loan_renewals.num_loans	
 FROM 
 	folio_derived.item_ext AS i
@@ -58,7 +56,7 @@ i.material_type_name,
 item_suppressed,
 link.title,
 loan_item_status,
-loans_items.loan_due_date,
-loans_items.loan_return_date,
+--loans_items.loan_due_date,
+--loans_items.loan_return_date,
 em.effective_shelving_order, 
 loan_renewals.num_loans;
