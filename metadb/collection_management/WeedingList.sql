@@ -34,7 +34,6 @@ FROM
 	LEFT JOIN folio_derived.instance_publication ip ON inst.instance_id = ip.instance_id 
 	LEFT JOIN folio_derived.instance_subjects AS sub ON inst.instance_id = sub.instance_id 
 WHERE
-
 --i.created_date >= '2022-06-01'
  --AND i.created_date <= '2022-06-30'
 --AND
@@ -57,7 +56,7 @@ i.volume,
 i.material_type_name,
 item_suppressed,
 link.title,
-loan_item_status,
+--loan_item_status,
 --loans_items.loan_due_date,
 --loans_items.loan_return_date,
 em.effective_shelving_order, 
