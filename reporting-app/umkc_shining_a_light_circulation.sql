@@ -16,7 +16,7 @@ RETURNS TABLE(
     item_id text,
     instance_id text,
     status_name text,
-    created_date text,
+    created_date date,
     statistical_code_name text,
     total_loans text,
     total_renewals text)
