@@ -12,6 +12,8 @@ RETURNS TABLE(
     location_name text,
     material_type text,
     title text,
+    author_name text,
+    publication_date text,
     barcode text,
     item_id text,
     instance_id text,
@@ -27,6 +29,8 @@ SELECT
     itemext.permanent_location_name as location_name,
 	itemext.material_type_name as material_type,
 	instext.title as title,
+    authors.contributor_name as author_name,
+	pubdate.date_of_publication as publication_date,
 	itemext.barcode as barcode,
 	itemext.item_id as item_id,
 	instext.instance_id as instance_id,
@@ -36,6 +40,8 @@ SELECT
     circ.num_loans,
 	circ.num_renewals  
 FROM folio_derived.instance_ext as instext
+     LEFT JOIN folio_derived.instance_contributors AS authors ON instext.instance_id = authors.instance_id
+	 LEFT JOIN folio_derived.instance_publication AS pubdate ON instext.instance_id = pubdate.instance_id
      LEFT JOIN folio_derived.holdings_ext AS he ON instext.instance_id = he.instance_id        
      LEFT JOIN folio_derived.locations_libraries AS ll ON he.permanent_location_id = ll.location_id       
      LEFT JOIN folio_derived.item_ext AS itemext ON he.holdings_id = itemext.holdings_record_id
