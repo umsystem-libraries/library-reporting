@@ -20,10 +20,10 @@ RETURNS TABLE(
     volume text,
     copy_number text,
     item_status text,
-    loans number,
-    renewals number,
-    item_id text,
-    instance_id text)
+    loans bigint,
+    renewals bigint,
+    item_id uuid,
+    instance_id uuid)
 AS $$
 SELECT
 	cast (itemext.created_date as DATE) as created_date,
