@@ -6,31 +6,21 @@ DROP FUNCTION IF EXISTS umkc_test;
 
 CREATE FUNCTION umkc_test()
 RETURNS TABLE(
-    item_location text,
-    item_barcode text,
-    item_call_number text,
-    item_enumeration text,
-    item_volume text,
-    item_title text)
+    holdings_id text,
+    title text,
+    holdings_hrid text,
+    library_name text)
 AS $$
-WITH missing AS (
-    SELECT jsonb_extract_path_text(jsonb, 'id')::uuid AS item_id
-        FROM folio_inventory.item
-        WHERE jsonb_extract_path_text(jsonb, 'status', 'name') = 'Missing'
-)
-SELECT loc.name AS item_location,
-       item.barcode AS item_barcode,
-       hld.call_number AS item_call_number,
-       item.enumeration AS item_enumeration,
-       item.volume AS item_volume,
-       inst.title AS item_title
-    FROM missing
-        LEFT JOIN folio_inventory.item__t AS item ON missing.item_id = item.id
-        LEFT JOIN folio_inventory.location__t AS loc ON item.effective_location_id::uuid = loc.id
-        LEFT JOIN folio_inventory.holdings_record__t AS hld ON item.holdings_record_id::uuid = hld.id
-        LEFT JOIN folio_inventory.instance__t AS inst ON hld.instance_id::uuid = inst.id
-    WHERE loc.name = 'UMKC MNL General Collection'
-    ORDER BY item_location, item_call_number
+SELECT 
+	holdings.instance_id as holdings_id,
+	instance.title as title,
+	holdings.holdings_hrid as holdings_hrid,
+	libraries.library_name as library_name
+FROM folio_derived.holdings_ext as holdings
+	left join folio_derived.instance_ext as instance on holdings.instance_id = instance.instance_id	
+	LEFT JOIN folio_derived.locations_libraries AS libraries ON holdings.permanent_location_id = libraries.location_id
+	LEFT JOIN folio_derived.item_ext AS items ON holdings.holdings_id = items.holdings_record_id
+where items.holdings_record_id is null and libraries.library_name = 'UMKC Miller Nichols Library'
 $$
 LANGUAGE SQL
 STABLE
