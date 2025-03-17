@@ -16,7 +16,7 @@ AS $$
 WITH missing AS (
     SELECT jsonb_extract_path_text(jsonb, 'id')::uuid AS item_id
         FROM folio_inventory.item
-        WHERE jsonb_extract_path_text(jsonb, 'status', 'name') = 'Missing' and loc.name = 'UMKC MNL General Collection'
+        WHERE jsonb_extract_path_text(jsonb, 'status', 'name') = 'Missing'
 )
 SELECT loc.name AS item_location,
        item.barcode AS item_barcode,
@@ -29,6 +29,7 @@ SELECT loc.name AS item_location,
         LEFT JOIN folio_inventory.location__t AS loc ON item.effective_location_id::uuid = loc.id
         LEFT JOIN folio_inventory.holdings_record__t AS hld ON item.holdings_record_id::uuid = hld.id
         LEFT JOIN folio_inventory.instance__t AS inst ON hld.instance_id::uuid = inst.id
+    WHERE loc.name = 'UMKC MNL General Collection'
     ORDER BY item_location, item_call_number
 $$
 LANGUAGE SQL
