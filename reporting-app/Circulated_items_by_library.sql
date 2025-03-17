@@ -4,7 +4,7 @@
 
 DROP FUNCTION IF EXISTS circulated_items;
 
-CREATE FUNCTION shining_circulation(
+CREATE FUNCTION circulated_items(
 )
 RETURNS TABLE(
     created_date date,
