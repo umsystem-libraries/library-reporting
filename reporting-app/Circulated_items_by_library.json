@@ -1,0 +1,7 @@
+{
+    "displayName": "Circulated Items by Library",
+    "description": "Items by selected library with at least 1 FOLIO loan.",
+    "instructions": [],
+    "parameters": [
+    ]
+}
