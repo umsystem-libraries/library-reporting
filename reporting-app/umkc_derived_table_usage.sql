@@ -17,7 +17,7 @@ SELECT
     relname as table_name, 
     seq_scan as usage, 
     last_seq_scan as last_scanned_date,  
-from pg_stat_user_tables WHERE schemaname LIKE 'folio_derived%' AND relname NOT LIKE 'zzz\_\_\_%' AND relname NOT LIKE '%\_\_' ORDER BY schemaname, relname
+from pg_stat_user_tables WHERE schemaname LIKE 'folio_derived%'
 $$
 LANGUAGE SQL
 STABLE
