@@ -26,6 +26,14 @@ from folio_derived.loans_renewal_count as circ
     LEFT JOIN folio_derived.holdings_ext AS holdings ON holdings.holdings_id = items.holdings_record_id
 	left join folio_derived.instance_ext as instances on holdings.instance_id = instances.instance_id
 where circ.num_loans > 0 and stat.statistical_code = 'umkcshining'
+group by
+	stat.statistical_code_name,
+	circ.item_id,
+	instances.title,
+	items.barcode,
+	items.effective_location_name,
+	circ.num_loans,
+	circ.num_renewals
 $$
 LANGUAGE SQL
 STABLE
