@@ -1,7 +1,13 @@
 {
     "displayName": "UMKC Shining a Light Circulation (Loans and Renewals)",
     "description": "UMKC Shining a Light Items with total loan and renewal counts.",
-    "instructions": [],
+    "instructions": "Enter minimum loan count",
     "parameters": [
+        {
+            "name": "min_loan",
+            "displayName": "Minimum loan counter",
+            "type": "int",
+            "required": false
+        }
     ]
 }

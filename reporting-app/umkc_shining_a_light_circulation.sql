@@ -4,7 +4,9 @@
 
 DROP FUNCTION IF EXISTS umkc_shining;
 
-CREATE FUNCTION umkc_shining()
+CREATE FUNCTION umkc_shining(
+    min_loan int DEFAULT '0'
+)
 RETURNS TABLE(
     statistical_code text,
     item_id text,
@@ -35,7 +37,7 @@ from folio_derived.loans_renewal_count as circ
 	left join folio_derived.instance_ext as instances on holdings.instance_id = instances.instance_id
     LEFT JOIN folio_derived.instance_contributors AS authors ON instances.instance_id = authors.instance_id
 	LEFT JOIN folio_derived.instance_publication AS pubdate ON instances.instance_id = pubdate.instance_id
-where circ.num_loans > 0 and stat.statistical_code = 'umkcshining'
+where circ.num_loans >= min_loan and stat.statistical_code = 'umkcshining'
 group by
 	stat.statistical_code_name,
 	items.item_id,
