@@ -1,1 +1,1 @@
-This report generates a list of Shining a Light FOLIO item records with total circulation and renewal counts. Items are identified using a statistical code.
+This report generates a list of Shining a Light FOLIO item records with total circulation and renewal counts. Items are identified using a statistical code. Staff can enter a minimum loan count to restrict the results (default = 0 minimum loans to retrieve all items).
