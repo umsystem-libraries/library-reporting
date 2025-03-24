@@ -1,77 +1,47 @@
---metadb:function shining_circulation
+--metadb:function umkc_shining
 
--- Report pulls Shining a Light items with loan and renewal counts.
+-- Query to get Shining a Light items
 
-DROP FUNCTION IF EXISTS shining_circulation;
+DROP FUNCTION IF EXISTS umkc_shining;
 
-CREATE FUNCTION shining_circulation(
-)
+CREATE FUNCTION umkc_shining()
 RETURNS TABLE(
-    campus_name text,
-    library_name text,
-    location_name text,
-    material_type text,
-    title text,
-    author_name date,
-    publication_date text,
-    barcode text,
+    statistical_code text,
     item_id text,
-    instance_id text,
-    status_name text,
-    created_date date,
-    statistical_code_name text,
-    total_loans text,
-    total_renewals text)
+    title text,
+    contributors text,
+    publication_dates text,
+    barcode text,
+    item_location text,
+    loans bigint,
+    renewals bigint)
 AS $$
-SELECT
-	stat.statistical_code_name,
-	cast (itemext.created_date as DATE),
-	instext.title,
-	--These functions put all the unique authors and publication dates into the same cell
-	string_agg (distinct authors.contributor_name,' | ') as contributors,
+SELECT 
+	stat.statistical_code_name as statistical_code,
+    items.item_id as item_id,
+    instances.title as title,
+    string_agg (distinct authors.contributor_name,' | ') as contributors,
 	string_agg (distinct pubdate.date_of_publication, ' | ') as publication_dates,
-	itemext.barcode,
-	itemext.material_type_name as item_material_type_name,
-    itemext.permanent_location_name,
-    itemext.permanent_loan_type_name,
-    itemext.effective_call_number,
-    itemext.volume,
-    itemext.copy_number,
-	itemext.status_name,
-	circ.num_loans,
-	circ.num_renewals,	
-	ll.library_name,
-	itemext.item_id as item_id,
-	instext.instance_id as instance_id
-FROM folio_derived.instance_ext as instext
-	 LEFT JOIN folio_derived.instance_contributors AS authors ON instext.instance_id = authors.instance_id
-	 LEFT JOIN folio_derived.instance_publication AS pubdate ON instext.instance_id = pubdate.instance_id
-	 LEFT JOIN folio_derived.holdings_ext AS he ON instext.instance_id = he.instance_id        
-     LEFT JOIN folio_derived.locations_libraries AS ll ON he.permanent_location_id = ll.location_id       
-     LEFT JOIN folio_derived.item_ext AS itemext ON he.holdings_id = itemext.holdings_record_id
-     LEFT JOIN folio_inventory.item__t AS ii ON itemext.item_id = ii.id
-     left join folio_derived.instance_formats as instfmt on instext.instance_id = instfmt.instance_id
-     left join folio_derived.item_statistical_codes as stat on itemext.item_id = stat.item_id
-     left join folio_derived.loans_renewal_count as circ on itemext.item_id = circ.item_id
-WHERE stat.statistical_code = 'umkcshining'
-group by 
-	itemext.barcode,
+    items.barcode as barcode,
+    items.effective_location_name as item_location,
+	circ.num_loans as loans,
+	circ.num_renewals as renewals
+from folio_derived.loans_renewal_count as circ
+    left join folio_derived.item_ext as items on circ.item_id = items.item_id
+    left join folio_derived.item_statistical_codes as stat on items.item_id = stat.item_id
+    LEFT JOIN folio_derived.holdings_ext AS holdings ON holdings.holdings_id = items.holdings_record_id
+	left join folio_derived.instance_ext as instances on holdings.instance_id = instances.instance_id
+    LEFT JOIN folio_derived.instance_contributors AS authors ON instances.instance_id = authors.instance_id
+	LEFT JOIN folio_derived.instance_publication AS pubdate ON instances.instance_id = pubdate.instance_id
+where circ.num_loans > 0 and stat.statistical_code = 'umkcshining'
+group by
 	stat.statistical_code_name,
-	itemext.created_date,
-	instext.title,
-	itemext.barcode,
-	itemext.material_type_name,
-    itemext.permanent_location_name,
-    itemext.permanent_loan_type_name,
-    itemext.effective_call_number,
-    itemext.volume,
-    itemext.copy_number,
-	itemext.status_name,
+	items.item_id,
+	instances.title,
+	items.barcode,
+	items.effective_location_name,
 	circ.num_loans,
-	circ.num_renewals,	
-	ll.library_name,
-	itemext.item_id,
-	instext.instance_id
+	circ.num_renewals
 $$
 LANGUAGE SQL
 STABLE
