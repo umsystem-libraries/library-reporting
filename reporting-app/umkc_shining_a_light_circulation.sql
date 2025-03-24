@@ -8,6 +8,7 @@ CREATE FUNCTION umkc_shining()
 RETURNS TABLE(
     statistical_code text,
     item_id text,
+    item_hrid text,
     title text,
     contributors text,
     publication_dates text,
@@ -19,6 +20,7 @@ AS $$
 SELECT 
 	stat.statistical_code_name as statistical_code,
     items.item_id as item_id,
+    items.item_hrid as item_hrid,
     instances.title as title,
     string_agg (distinct authors.contributor_name,' | ') as contributors,
 	string_agg (distinct pubdate.date_of_publication, ' | ') as publication_dates,
@@ -37,6 +39,7 @@ where circ.num_loans > 0 and stat.statistical_code = 'umkcshining'
 group by
 	stat.statistical_code_name,
 	items.item_id,
+    items.item_hrid,
 	instances.title,
 	items.barcode,
 	items.effective_location_name,
