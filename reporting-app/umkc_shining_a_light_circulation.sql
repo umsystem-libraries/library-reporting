@@ -10,6 +10,7 @@ CREATE FUNCTION umkc_shining(
 RETURNS TABLE(
     statistical_code text,
     instance_id text,
+    instance_hrid text,
     item_id text,
     item_hrid text,
     title text,
@@ -23,6 +24,7 @@ AS $$
 SELECT 
 	stat.statistical_code_name as statistical_code,
     instances.instance_id as instance_id,
+    instances.instance_hrid as instance_hrid,
     items.item_id as item_id,
     items.item_hrid as item_hrid,
     instances.title as title,
@@ -43,6 +45,7 @@ where circ.num_loans >= min_loan and stat.statistical_code = 'umkcshining'
 group by
 	stat.statistical_code_name,
     instances.instance_id,
+    instances.instance_hrid,
 	items.item_id,
     items.item_hrid,
 	instances.title,
