@@ -16,7 +16,9 @@ RETURNS TABLE(
     publication_date text,
     barcode text,
     item_id text,
+    item_hrid text,
     instance_id text,
+    instance_hrid text,
     status_name text,
     created_date date,
     statistical_code_name text,
@@ -41,8 +43,10 @@ SELECT
 	circ.num_loans,
 	circ.num_renewals,	
 	ll.library_name,
-	itemext.item_id,
-	instext.instance_id
+	itemext.item_id as item_id,
+    itemext.item_hrid as item_hrid,
+	instext.instance_id as instance_id,
+    instex.instance_hrid as instance_hrid
 FROM folio_derived.instance_ext as instext
 	 LEFT JOIN folio_derived.instance_contributors AS authors ON instext.instance_id = authors.instance_id
 	 LEFT JOIN folio_derived.instance_publication AS pubdate ON instext.instance_id = pubdate.instance_id
@@ -71,7 +75,9 @@ group by
 	circ.num_renewals,	
 	ll.library_name,
 	itemext.item_id,
-	instext.instance_id
+    itemext.item_hrid,
+	instext.instance_id,
+    instex.instance_hrid
 $$
 LANGUAGE SQL
 STABLE
