@@ -53,6 +53,10 @@ group by
     vendor.organization_name,
     poline.po_line_number,
     poline.receipt_date
+order by
+    acq_unit,
+    fund,
+    date_ordered
 $$
 LANGUAGE SQL
 STABLE
