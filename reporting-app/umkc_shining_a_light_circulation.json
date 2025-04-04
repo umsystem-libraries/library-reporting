@@ -3,5 +3,9 @@
     "description": "UMKC Shining a Light Items with total loan and renewal counts.",
     "instructions": "Just run the report",
     "parameters": [
+        "name": "min_loan",
+        "displayName": "Minimum Loan",
+        "type": "int",
+        "required": false
     ]
 }

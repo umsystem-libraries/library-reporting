@@ -3,11 +3,5 @@
     "description": "List of UMKC open orders",
     "instructions": "Enter an optional order type. Default is One-Time",
     "parameters": [
-        {
-            "name": "order_type",
-            "displayName": "Order Type",
-            "type": "int",
-            "required": false
-        }
     ]
 }
