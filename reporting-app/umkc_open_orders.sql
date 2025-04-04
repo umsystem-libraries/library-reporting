@@ -10,7 +10,7 @@ RETURNS TABLE(
     acq_unit text,
     title text,
     date_ordered date,
-    estimated_price numeric,
+    estimated_price bigint,
     selector text,
     fund text,
     physical_mat_type text,
@@ -53,10 +53,6 @@ group by
     vendor.organization_name,
     poline.po_line_number,
     poline.receipt_date
-order by
-    acq_unit,
-    fund,
-    date_ordered
 $$
 LANGUAGE SQL
 STABLE
