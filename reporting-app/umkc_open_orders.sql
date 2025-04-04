@@ -10,7 +10,7 @@ RETURNS TABLE(
     acq_unit text,
     title text,
     date_ordered date,
-    estimated_price decimal,
+    estimated_price float,
     selector text,
     fund text,
     physical_mat_type text,
