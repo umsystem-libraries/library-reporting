@@ -1,13 +1,7 @@
 {
     "displayName": "UMKC Open Orders",
     "description": "List of UMKC open orders",
-    "instructions": "Enter an optional order type. Default is One-Time",
+    "instructions": "Run the report. Order type = One-Time",
     "parameters": [
-        {        
-        "name": "order_type",
-        "displayName": "Order Type",
-        "type": "text",
-        "required": false
-    }
     ]
 }

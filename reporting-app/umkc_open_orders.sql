@@ -5,7 +5,6 @@
 DROP FUNCTION IF EXISTS umkc_orders;
 
 CREATE FUNCTION umkc_orders(
-    order_type text DEFAULT 'One-Time'
 )
 RETURNS TABLE(
     acq_unit text,
@@ -41,7 +40,7 @@ from folio_orders.po_line__t as poline
 	left join folio_derived.po_lines_fund_distribution_transactions as fund on poline.po_line_number = fund.poline_number
 	left join folio_derived.finance_funds as fundname on fund.fund_code = fundname.fund_code
 	left join folio_derived.po_organization as vendor on po.po_number = vendor.po_number
-	where po.order_type = order_type and po.workflow_status = 'Open' and acq.po_acquisition_unit_name like 'UMKC%'
+	where po.order_type = 'One-Time' and po.workflow_status = 'Open' and acq.po_acquisition_unit_name like 'UMKC%'
 group by
     acq.po_acquisition_unit_name,
     poline.title_or_package,
