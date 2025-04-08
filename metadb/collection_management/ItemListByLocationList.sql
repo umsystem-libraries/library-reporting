@@ -10,6 +10,7 @@ SELECT
     itemext.chronology,
     itemext.enumeration,
     itemext.volume,
+    string_agg (distinct contributors.contributor_name, '|') as contributor_name,
     itemext.status_name AS item_status,
     itemext.status_date::date as item_status_date,
 --    string_agg (distinct itemnotes.note,' | ') as item_notes,
@@ -29,6 +30,7 @@ FROM folio_derived.instance_ext AS instext
      LEFT JOIN folio_derived.item_ext AS itemext ON he.holdings_id = itemext.holdings_record_id
      LEFT JOIN folio_inventory.item__t AS ii ON itemext.item_id = ii.id
      LEFT JOIN folio_derived.item_notes AS itemnotes ON itemext.item_id = itemnotes.item_id
+     left join folio_derived.instance_contributors as contributors on instext.instance_id = contributors.instance_id
 
 WHERE 
 	itemext.effective_location_name in ('UMSL TJL Depository', 'UMSL Merc Remote Storage', 'UMSL Depository Copy', 'UMKC Law Remote Storage', 'UMKC HSL Remote Storage',
@@ -36,14 +38,13 @@ WHERE
 	--itemext.effective_location_name in ('UMSL TJL Depository','MST Remote Storage') --smaller selection for testing
 	AND itemext.material_type_name in ('Serial', 'Journal')
 
-order by 
+/*order by 
 	instext.title,
 	itemext.chronology,
 	itemext.enumeration,
 	itemext.volume
-;
-
-/*GROUP BY 
+*/
+GROUP BY 
 	ll.library_name,           
 	    he.permanent_location_name,
 	    he.temporary_location_name,
@@ -60,7 +61,9 @@ order by
 	    itemext.chronology,
 	    itemext.enumeration,
 	    itemext.volume,       
+	    --contributors.contributor_name,
         itemext.status_name,
         itemext.status_date::date,
         itemext.material_type_name,
-        ii.effective_shelving_order COLLATE "C"*/
+        ii.effective_shelving_order COLLATE "C"
+;
