@@ -32,7 +32,7 @@ SELECT
 	string_agg (distinct pubdate.date_of_publication, ' | ') as publication_dates,
     items.barcode as barcode,
     items.effective_location_name as item_location,
-	COUNT(*) AS checkouts
+	-- COUNT(*) AS checkouts
 from folio_derived.loans_items as loans
     left join folio_derived.item_ext as items on loans.item_id = items.item_id
     left join folio_derived.item_statistical_codes as stat on items.item_id = stat.item_id
