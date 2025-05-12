@@ -1,0 +1,18 @@
+{
+    "displayName": "UMKC Shining a Light Circulation (Loans within Date Range)",
+    "description": "UMKC Shining a Light Items with total loan counts within date range.",
+    "instructions": "Enter starting and ending date",
+    "parameters": [
+        {        "name": "start_date",
+        "displayName": "Start Date",
+        "type": "date",
+        "required": false
+    },
+           {        "name": "end_date",
+        "displayName": "End Date",
+        "type": "date",
+        "required": false
+    }
+
+    ]
+}
