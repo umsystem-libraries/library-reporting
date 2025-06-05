@@ -14,4 +14,12 @@
 - Script used to locate all items where the instance record has an "electronic access" field value matching an old URL pattern from UMI (microfilm predecessor to Proquest for theses and dissertations)
 - Retrieve enough bibliographic metadata to locate the ETD in PQDT and get the new permalink, along with enough information (instance ID) to locate each record for correction
 
-- 
+## InHouseUseByBarcode.sql
+- if you have a comma-separated list of barcode strings, you can paste it in the WHERE...in(<list goes here>) to determine in-house uses for those specific items.
+- In-house use determined by a check-in where the status_before_checkin is "Available" (e.g. it was on the shelf, not checked out, not in transit, etc. etc.)
+
+## InHouseUseByLibrary.sql
+- if you want the list of everything tagged as an in-house use for a particular library, use this one.
+
+## LoanCountByItem.sql
+- List of loaned items matching a date filter and location_library_code filter to find out which items from that library have been loaned, and how many times
