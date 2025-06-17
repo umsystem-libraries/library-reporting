@@ -5,6 +5,10 @@
 - JOINs instance, holdings, locations, item, item_note, and contributors tables to assemble human-readable (resolving IDs to names, details, etc.) output.
 - Originally developed to support identification of potential duplicates at UM Depository (specifically outputs chronology/enumeration/volume and contributors), but could be useful or have fields added for a variety of scenarios.
 
+## ItemListByStatCode.sql
+- Returns a list of items for a specific statistical code.
+- **You need to replace VALUE with a valid statistical code in the WHERE clause.**
+
 ## ItemCountByCampus
 - Developed to support ARL/ACRL statistics. Filtering on campus name and location, as well as a variety of properties of item/instance/holding type and formats.
 - Contains multiple blocks for different needs in identifying monographs, serials, and media. Comment in and out the necessary 'where' blocks.
@@ -23,3 +27,8 @@
 
 ## LoanCountByItem.sql
 - List of loaned items matching a date filter and location_library_code filter to find out which items from that library have been loaned, and how many times
+
+## WithdrawnItems.sql
+- List of items with Withdrawn status.
+- **Replace BEGIN and END with starting and ending dates, using yyyy-mm-dd format, to limit to withdrawn items where status was changed between start and end (remove this entirely for all withdrawn items).**
+- **Replace VALUE in permanent location name to a valid location. NOTE: You can wildcard. Example: 'UMKC%' will retrieve items in locations starting with UMKC.**
