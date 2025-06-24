@@ -12,8 +12,8 @@ RETURNS TABLE(
     loan_count bigint)
 AS $$
 SELECT ,
-	l.current_item_permanent_location_library_name,	
-	count (l.loan_id)
+	l.current_item_permanent_location_library_name as library_name,	
+	count (l.loan_id) as loan_count
     FROM folio_derived.loans_items AS l
     WHERE l.loan_date between start_date and end_date and and l.current_item_permanent_location_campus_name = campus and l.checkout_service_point_name like 'DCB%'
     GROUP BY l.current_item_permanent_location_library_name
