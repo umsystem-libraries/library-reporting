@@ -6,8 +6,9 @@ CREATE FUNCTION mobius_loans(
 )
 RETURNS TABLE(
     library_name text
+)
 AS $$
-SELECT ,
+SELECT
 	l.current_item_permanent_location_library_name as library_name
     FROM folio_derived.loans_items AS l
     WHERE l.loan_date between '2024-07-01' and '2025-07-01' and l.current_item_permanent_location_campus_name = 'University of Missouri - Kansas City' and l.checkout_service_point_name like 'DCB%'
