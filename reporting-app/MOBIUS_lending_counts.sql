@@ -6,12 +6,12 @@ CREATE FUNCTION mobius_loans(
 )
 RETURNS TABLE(
     library_name text,
-    loan_count bigint
+    loan_count text
 )
 AS $$
 SELECT
 	l.current_item_permanent_location_library_name as library_name,
-    count (loan_id) as loan_count
+    loan_id as loan_count
     FROM folio_derived.loans_items AS l
     WHERE l.loan_date between '2024-07-01' and '2025-07-01' and l.current_item_permanent_location_campus_name = 'University of Missouri - Kansas City' and l.checkout_service_point_name like 'DCB%'
     GROUP BY l.current_item_permanent_location_library_name
