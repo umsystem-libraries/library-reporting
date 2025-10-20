@@ -54,11 +54,11 @@ the fees_fines.accounts__t__ table a list of, for users affiliated with a partic
 
 ## Users_with_permissions.sql
 Reports User records with permissions. Campus code mapping:
-	-- MST = "opt_0"  
-	-- MU = "opt_1"  
-	-- SHS = "opt_2"  
-	-- UMKC = "opt_3"  
-	-- UMSL = "opt_4"
+- MST = "opt_0"  
+- MU = "opt_1"  
+- SHS = "opt_2"  
+- UMKC = "opt_3"  
+- UMSL = "opt_4"
 
 SELECT outputs:
 - Status, last name, first name, username, email, campus custom field, departments (from users)
