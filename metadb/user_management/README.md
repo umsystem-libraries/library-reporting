@@ -53,17 +53,25 @@ the fees_fines.accounts__t__ table a list of, for users affiliated with a partic
 -	grouped by 'patron group' name.
 
 ## Users_with_permissions.sql
-Reports User records with permissions.
+Reports User records with permissions. Campus code mapping:
+	-- MST = "opt_0"  
+	-- MU = "opt_1"  
+	-- SHS = "opt_2"  
+	-- UMKC = "opt_3"  
+	-- UMSL = "opt_4"
+
 SELECT outputs:
 - Status, last name, first name, username, email, campus custom field, departments (from users)
 - Default service point (from spname)
 - Patron group (from groups)
 - Permissions (from permissions)
+
 FROM tables:
 - folio_permissions.permissions_users (perms) for the permissions assigned to user
 - folio_users.users (users) to get meaningful data for the user
 - folio_derived.users_groups (groups) to map the group ID to the meaningful name
 - folio_inventory.service_point_user (sp) to get default service point assigned to user
 - folio_inventory.service_point (spname) to map the service point ID to the meaningful name
+
 WHERE filters:
 - Limits results to records where the permissions field is not empty
