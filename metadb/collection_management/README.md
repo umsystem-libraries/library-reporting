@@ -5,6 +5,10 @@
 - JOINs instance, holdings, locations, item, item_note, and contributors tables to assemble human-readable (resolving IDs to names, details, etc.) output.
 - Originally developed to support identification of potential duplicates at UM Depository (specifically outputs chronology/enumeration/volume and contributors), but could be useful or have fields added for a variety of scenarios.
 
+## ItemListByPublisher.sql
+- This script returns a detailed item list for items with a publisher matching a string. Uses ILIKE %..% (case-insensitive LIKE clause, with wildcards). Edit this string or condition in the WHERE clause for different publisher names (ILIKE and wildcards help account for variations, though some complicated situations may need an OR to account for other possible names).
+- JOINs instance, holdings, locations, item, item_note, and contributors tables to assemble human-readable (resolving IDs to names, details, etc.) output.
+
 ## ItemListByStatCode.sql
 - Returns a list of items for a specific statistical code.
 - **You need to replace VALUE with a valid statistical code in the WHERE clause.**
