@@ -1,0 +1,19 @@
+{
+    "displayName": "Inhouse counts by location",
+    "description": "Inhouse counts by shelving location",
+    "instructions": "Enter parameters",
+    "parameters": [
+        {
+            "name": "start_date",
+            "displayName": "Earliest loan date to return",
+            "type": "date",
+            "required": false
+        },
+        {
+            "name": "end_date",
+            "displayName": "Latest loan date to return",
+            "type": "date",
+            "required": false
+        }
+    ]
+}
