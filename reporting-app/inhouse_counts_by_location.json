@@ -5,13 +5,13 @@
     "parameters": [
         {
             "name": "start_date",
-            "displayName": "Earliest loan date to return",
+            "displayName": "Earliest loan date to return (mm-dd-yyyy)",
             "type": "date",
             "required": false
         },
         {
             "name": "end_date",
-            "displayName": "Latest loan date to return",
+            "displayName": "Latest loan date to return (mm-dd-yyyy)",
             "type": "date",
             "required": false
         }
