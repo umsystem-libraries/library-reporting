@@ -17,7 +17,7 @@
         },
         {
             "name": "campus_prefix",
-            "displayName": "Enter campus prefix (MST, MU, UMKC, UMSL",
+            "displayName": "Enter campus prefix (MST, MU, UMKC, UMSL)",
             "type": "text",
             "required": false
         }

@@ -4,7 +4,7 @@
 
 This report reports inhouse counts by location by counting check in transactions where item status prior to check in = Available and request queue size = 0 (meaning it wasn't scanned to fill a page request). 
 
-Reporter can enter start and end dates.
+Reporter can enter start and end dates as well as campus prefix used in locations (MST, MU, UMKC, UMSL).
 
 Output is pretty simple. Two columns:
 
