@@ -14,6 +14,12 @@
             "displayName": "Latest loan date to return (mm-dd-yyyy)",
             "type": "date",
             "required": false
+        },
+        {
+            "name": "campus_code",
+            "displayName": "Enter campus prefix (MST, MU, UMKC, UMSL",
+            "type": "text",
+            "required": false
         }
     ]
 }
