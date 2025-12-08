@@ -4,12 +4,6 @@
     "instructions": "Enter parameters.",
     "parameters": [
         {
-            "name": "due_date",
-            "displayName": "Enter due date (mm-dd-yyyy). The report will ignore open loans with a later due date.",
-            "type": "date",
-            "required": false
-        },
-        {
             "name": "campus_prefix",
             "displayName": "Enter campus prefix (MST, MU, UMKC, UMSL)",
             "type": "text",
