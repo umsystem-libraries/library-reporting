@@ -42,7 +42,7 @@ FROM folio_derived.loans_items AS l
 	join folio_derived.holdings_ext as h on items.holdings_record_id = h.holdings_id
 	join folio_derived.instance_ext as b on h.instance_id = b.instance_id
 	join folio_users.users as u on l.user_id = u.id
-WHERE (l.current_item_permanent_location_library_name like 'UMKC%') and (l.checkout_service_point_name like 'DCB%') and (l.loan_status <> 'Closed')
+WHERE (l.current_item_permanent_location_library_name like campus_prefix ||'%') and (l.checkout_service_point_name like 'DCB%') and (l.loan_status <> 'Closed')
 $$
 LANGUAGE SQL
 STABLE
