@@ -1,7 +1,7 @@
 {
     "displayName": "Inhouse counts by location",
     "description": "Inhouse counts by shelving location",
-    "instructions": "Enter parameters. Currently, this query is hardcoded to limit to UMKC locations.",
+    "instructions": "Enter parameters.",
     "parameters": [
         {
             "name": "start_date",
