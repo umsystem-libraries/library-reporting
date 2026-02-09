@@ -29,7 +29,7 @@ where (ll.campus_name='University of Missouri - Columbia' or itemext.permanent_l
 	and instfmt.instance_format_name in ('unmediated -- volume')
 	and instext.type_name in ('text', 'still image', 'notated music')
 	and not itemext.status_name = 'Withdrawn'
-	and itemext.created_date between '2000-01-01' and '2024-06-30'
+	and itemext.created_date between '2000-01-01' and '2025-06-30'
 /*USE THIS BLOCK FOR SERIALS*/
 /*where (ll.campus_name='University of Missouri - Columbia' or itemext.permanent_location_name in ('MU Library Depository 1', 'MU Library Depository 2', 
 'MU Special Collections Library Depository 1','MU Special Collections Library Depository 2'))
@@ -40,7 +40,7 @@ where (ll.campus_name='University of Missouri - Columbia' or itemext.permanent_l
 	and not instfmt.instance_format_name = 'computer -- online resource'
 	--and instext.type_name in ('text', 'still image', 'notated music')
 	and not itemext.status_name = 'Withdrawn'
-	and itemext.created_date between '2000-01-01' and '2024-06-30'
+	and itemext.created_date between '2000-01-01' and '2025-06-30'
 */
 /*USE THIS BLOCK FOR MAPS*/
 /*
@@ -52,7 +52,7 @@ where (ll.campus_name='University of Missouri - Columbia' or itemext.permanent_l
 	and instext.type_name in ('cartographic image', 'cartographic dataset')
 	and instfmt.instance_format_name in ('unmediated -- sheet', 'unmediated -- volume')
 	and not itemext.status_name = 'Withdrawn'
-	and itemext.created_date between '2000-01-01' and '2024-06-30'
+	and itemext.created_date between '2000-01-01' and '2025-06-30'
 */
 /*USE THIS BLOCK FOR MEDIA*/
 /*where (ll.campus_name='University of Missouri - Columbia' or itemext.permanent_location_name in ('MU Library Depository 1', 'MU Library Depository 2', 
@@ -64,7 +64,8 @@ where (ll.campus_name='University of Missouri - Columbia' or itemext.permanent_l
 	and instext.type_name not in ('cartographic image', 'cartographic dataset', 'notated music')
 	and instfmt.instance_format_name not in ('unmediated -- volume', 'computer -- online resource')
 	and not itemext.status_name = 'Withdrawn'
-	and itemext.created_date between '2000-01-01' and '2024-06-30'
+	and itemext.created_date between '2000-01-01' and '2025-06-30'
 */
 ) --as instance_count
+
 ;
