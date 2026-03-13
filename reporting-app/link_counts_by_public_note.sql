@@ -25,4 +25,3 @@ WHERE u.public_note LIKE ('%' || public_note || '%')
 GROUP BY u.public_note, inst.discovery_suppress
 ORDER BY records DESC
 $func$;
-``
