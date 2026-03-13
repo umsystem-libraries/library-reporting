@@ -1,23 +1,28 @@
---metadb:function link_count
+-- Drop with explicit signature to avoid ambiguity
+DROP FUNCTION IF EXISTS link_count(text);
 
-DROP FUNCTION IF EXISTS link_count;
-
+-- Create function; consider schema-qualifying the function name if needed, e.g. reporting.link_count
 CREATE FUNCTION link_count(
-    /* parameter for public note */
-    public_note text DEFAULT '')
+    /* parameter for public note filter */
+    public_note text DEFAULT ''
+)
 RETURNS TABLE(
     856_public_note text,
     suppressed text,
-    records bigint) AS
-$$
+    records bigint
+)
+LANGUAGE SQL
+STABLE
+AS $func$
 SELECT 
-    u.public_note as 856_public_note,
-    inst.discovery_suppress::text,
-    COUNT(u.public_note) as records
+    u.public_note AS 856_public_note,
+    inst.discovery_suppress::text AS suppressed,  -- cast boolean -> text
+    COUNT(u.public_note) AS records
 FROM folio_derived.instance_electronic_access AS u
-join folio_derived.instance_ext as inst on u.instance_hrid = inst.instance_hrid
-where u.public_note like ('%'||public_note||'%')
-group by u.public_note, inst.discovery_suppress
-order by records desc
-$$
-LANGUAGE SQL;
+JOIN folio_derived.instance_ext AS inst 
+  ON u.instance_hrid = inst.instance_hrid
+WHERE u.public_note LIKE ('%' || public_note || '%')
+GROUP BY u.public_note, inst.discovery_suppress
+ORDER BY records DESC
+$func$;
+``
