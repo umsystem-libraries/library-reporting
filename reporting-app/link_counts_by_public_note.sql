@@ -12,12 +12,8 @@ RETURNS TABLE(
 $$
 SELECT 
     u.public_note as 856_public_note,
-case
-	when inst.discovery_suppress is true then 'Yes'
-	when inst.discovery_suppress is false then 'No'
-	else 'Unknown'
-end as suppressed,
-COUNT(u.public_note) as records
+    inst.discovery_suppress,
+    COUNT(u.public_note) as records
 FROM folio_derived.instance_electronic_access AS u
 join folio_derived.instance_ext as inst on u.instance_hrid = inst.instance_hrid
 where u.public_note like ('%'||public_note||'%')
