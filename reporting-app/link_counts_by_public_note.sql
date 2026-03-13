@@ -12,7 +12,7 @@ RETURNS TABLE(
 $$
 SELECT 
     u.public_note as 856_public_note,
-    inst.discovery_suppress,
+    inst.discovery_suppress::text,
     COUNT(u.public_note) as records
 FROM folio_derived.instance_electronic_access AS u
 join folio_derived.instance_ext as inst on u.instance_hrid = inst.instance_hrid
