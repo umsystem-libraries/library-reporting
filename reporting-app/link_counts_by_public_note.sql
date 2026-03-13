@@ -17,7 +17,7 @@ AS $func$
 SELECT 
     u.public_note AS 856_public_note,
     inst.discovery_suppress::text AS suppressed,  -- cast boolean -> text
-    COUNT(u.public_note) AS records
+    COUNT(*) AS records
 FROM folio_derived.instance_electronic_access AS u
 JOIN folio_derived.instance_ext AS inst 
   ON u.instance_hrid = inst.instance_hrid
