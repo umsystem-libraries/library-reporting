@@ -1,0 +1,65 @@
+{
+    "displayName": "Items by Library - with circulation counts",
+    "description": "This report shows all items associated with a library or location, the number of FOLIO circulations for each item, and the last loan date and last return dates.",
+    "instructions": "Choose a start and end date for the loans period, and specify items_permanent_location_filter, items_temporary_location_filter, or items_temporary_location_filter to filter by location; institution_filter, campus_filter, and library_filter connect to the item's permanent location.",
+    "parameters": [
+        {
+            "name": "start_date",
+            "displayName": "Earliest loan date to return",
+            "type": "date",
+            "required": false
+        },
+        {
+            "name": "end_date",
+            "displayName": "Latest loan date to return",
+            "type": "date",
+            "required": false
+        },
+        {
+            "name": "items_permanent_location_filter",
+            "displayName": "Permanent location filter",
+            "type": "text",
+            "required": false
+        },
+        {
+            "name": "items_temporary_location_filter",
+            "displayName": "Temporary location filter",
+            "type": "text",
+            "required": false
+        },
+        {
+            "name": "items_effective_location_filter",
+            "displayName": "Effective location filter",
+            "type": "text",
+            "required": false
+        },
+        {
+            "name": "institution_filter",
+            "displayName": "Institution permanent location filter",
+            "type": "text",
+            "required": false
+        },
+        {
+            "name": "campus_filter",
+            "displayName": "Campus permanent location filter",
+            "type": "text",
+            "required": false
+        },
+        {
+            "name": "library_filter",
+            "displayName": "Library permanent location filter",
+            "type": "text",
+            "required": false,
+            "options": [
+                {
+                    "label": "MU Engineering Library",
+                    "value": "MU Engineering Library"
+                },
+                {
+                    "label": "MU Ellis Library",
+                    "value": "MU Ellis Library"
+                }
+            ]
+        }
+    ]
+}
