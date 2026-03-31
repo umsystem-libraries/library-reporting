@@ -48,7 +48,7 @@
         {
             "name": "library_filter",
             "displayName": "Library permanent location filter",
-            "type": "text",
+            "type": "string",
             "required": false,
             "options": [
                 {
