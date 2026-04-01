@@ -55,3 +55,5 @@ from folio_derived.instance_ext as instext
 	left join folio_derived.locations_libraries as ll on ie.permanent_location_id = ll.location_id 
 where ll.library_code = 'CENGR' 
 group by date_range, instext.instance_hrid, ie.item_hrid, instext.title, ie.effective_call_number, ie.item_hrid, ie.barcode, ie.permanent_location_name, li.loan_policy_name, ie.material_type_name  
+&&
+LANGUAGE SQL;
