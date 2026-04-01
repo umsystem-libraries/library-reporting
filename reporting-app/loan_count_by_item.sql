@@ -31,7 +31,7 @@ returns TABLE(
     loan_type_name text,
     material_type_name text,
     permanent_location_name text,
-    effective_location_name text,
+    effective_location_name text
 ) as
 &&
 SELECT start_date || ' to ' || end_date AS date_range,
