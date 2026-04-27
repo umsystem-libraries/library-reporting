@@ -2,9 +2,9 @@
 
 -- Query to get open orders
 
-DROP FUNCTION IF EXISTS umkc_orders;
+DROP FUNCTION IF EXISTS oprn_orders;
 
-CREATE FUNCTION umkc_orders(
+CREATE FUNCTION open_orders(
     acq_unit text DEFAULT '*'
 )
 RETURNS TABLE(

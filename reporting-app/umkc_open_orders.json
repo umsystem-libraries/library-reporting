@@ -1,6 +1,6 @@
 {
-    "displayName": "UMKC Open Orders",
-    "description": "List of UMKC open orders",
+    "displayName": "Open Orders by Acq Unit",
+    "description": "List of open orders for the selected Acquisitions Unit",
     "instructions": "Enter Acquisitions Unit and run the report. Order type = One-Time",
     "parameters": [
                 {
