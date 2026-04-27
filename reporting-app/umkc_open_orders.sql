@@ -1,8 +1,8 @@
---metadb:function umkc_orders
+--metadb:function open_orders
 
 -- Query to get open orders
 
-DROP FUNCTION IF EXISTS oprn_orders;
+DROP FUNCTION IF EXISTS open_orders;
 
 CREATE FUNCTION open_orders(
     acq_unit text DEFAULT '*'
