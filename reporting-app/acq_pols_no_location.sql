@@ -15,15 +15,15 @@ RETURNS TABLE(
     shelving_location text)
 AS $$
 SELECT 
+    acq.po_acquisition_unit_name as acq_unit,
     loc.pol_id as pol_uuid,
     instance.po_line_number as pol_number,
-    loc.pol_location_name as shelving_location,
     instance.title as title,
-    acq.po_acquisition_unit_name as acq_unit 
+    loc.pol_location_name as shelving_location
 FROM folio_derived.po_lines_locations AS loc
 left JOIN folio_derived.po_instance as instance on loc.pol_id = instance.po_line_id
 left join folio_derived.po_acq_unit_ids as acq on instance.po_number = acq.po_number
-WHERE loc.pol_location_name IS null
+WHERE loc.pol_location_name IS null and acq.po_acquisition_unit_name = acq_unit
 order by
     acq_unit
 $$
