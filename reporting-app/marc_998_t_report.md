@@ -1,0 +1,1 @@
+This report pulls a list of records where the MARC 998 subfield t is not null. A value of '1' is used to mark electronic resources records for suppression in the MOBIUS catalog.
