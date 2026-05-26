@@ -1,8 +1,12 @@
-CREATE FUNCTION marc_mobius()
+CREATE OR REPLACE FUNCTION marc_mobius()
 RETURNS TABLE(
     hrid text,
     title text,
-    marc_998t text)
+    marc_998t text
+)
+LANGUAGE SQL
+STABLE
+PARALLEL SAFE
 AS $$
 SELECT 
     i.instance_hrid as hrid,
@@ -11,12 +15,8 @@ SELECT
 from folio_source_record.marc__t mt
     JOIN folio_derived.instance_ext i
         ON i.instance_id = mt.instance_id
-    WHERE mt.field = '998'
-        AND mt.sf = 't'
-        AND mt.content is not null
-order by
-    title
-$$
-LANGUAGE SQL
-STABLE
-PARALLEL SAFE;
+WHERE mt.field = '998'
+    AND mt.sf = 't'
+    AND mt.content is not null
+ORDER BY title
+$$;
