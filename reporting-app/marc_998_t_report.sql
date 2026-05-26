@@ -19,4 +19,4 @@ WHERE mt.field = '998'
     AND mt.sf = 't'
     AND mt.content is not null
 ORDER BY title
-$$;
+$$
