@@ -13,10 +13,6 @@ SELECT
     i.title as title,
     mt.content as marc_998t
 from folio_source_record.marc__t mt
-    JOIN folio_derived.instance_ext i
-        ON i.instance_id = mt.instance_id
-WHERE mt.field = '998'
-    AND mt.sf = 't'
-    AND mt.content is not null
-ORDER BY title
+JOIN folio_derived.instance_ext i ON i.instance_id = mt.instance_id
+WHERE mt.field = '998' AND mt.sf = 't' AND mt.content is not null
 $$
