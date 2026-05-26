@@ -1,7 +1,3 @@
--- MARC 998 $t = 1 to suppress in MOBIUS catalog
-
-DROP FUNCTION IF EXISTS marc_mobius;
-
 CREATE FUNCTION marc_mobius()
 RETURNS TABLE(
     hrid text,
