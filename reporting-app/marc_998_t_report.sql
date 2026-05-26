@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION marc_mobius()
+CREATE OR REPLACE FUNCTION public.marc_mobius()
 RETURNS TABLE(
     hrid text,
     title text,
