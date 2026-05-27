@@ -1,3 +1,4 @@
+--metadb:function marc_mobius
 CREATE OR REPLACE FUNCTION marc_mobius()
 RETURNS TABLE(
     hrid text,
