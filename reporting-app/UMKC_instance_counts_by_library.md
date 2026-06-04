@@ -2,4 +2,4 @@
 
 ## Report details
 
-This report lists the count of distinct instances by library and material type. 
+This report lists the count of distinct instances by library and material type.
