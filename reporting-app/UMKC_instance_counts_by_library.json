@@ -1,0 +1,6 @@
+    {
+    "displayName": "UMKC Instance Counts by Library and Material Type",
+    "description": "Provides a table of instances by library and material type.",
+    "instructions": "Just run the report",
+    "parameters":[]
+    }
