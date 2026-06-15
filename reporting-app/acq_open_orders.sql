@@ -5,7 +5,7 @@
 DROP FUNCTION IF EXISTS open_orders;
 
 CREATE FUNCTION open_orders(
-    acq_unit text DEFAULT '*'
+    acq_unit text DEFAULT ''
 )
 RETURNS TABLE(
     acq_unit text,
