@@ -7,43 +7,33 @@ DROP FUNCTION IF EXISTS circulated_items;
 CREATE FUNCTION circulated_items(
 )
 RETURNS TABLE(
-    created_date date,
+    barcode text,
     title text,
     contributors text,
     publication_dates text,
-    barcode text,
     library text,
     shelving_location text,
     material_type text,
-    loan_type text,
     call_number text,
     volume text,
     copy_number text,
-    item_status text,
     loans bigint,
-    renewals bigint,
-    item_id text,
-    instance_id text)
+    renewals bigint)
 AS $$
 SELECT
-	itemext.created_date::date as created_date,
-	instext.title as title,
+	itemext.barcode as barcode,
+    instext.title as title,
 	--These functions put all the unique authors and publication dates into the same cell
 	string_agg (distinct authors.contributor_name,' | ') as contributors,
 	string_agg (distinct pubdate.date_of_publication, ' | ') as publication_dates,
-	itemext.barcode as barcode,
     ll.library_name as library,
     itemext.permanent_location_name as shelving_location,
 	itemext.material_type_name as material_type,
-    itemext.permanent_loan_type_name as loan_type,
     itemext.effective_call_number as call_number,
     itemext.volume as volume,
     itemext.copy_number as copy_number,
-	itemext.status_name as item_status,
 	circ.num_loans as loans,
-	circ.num_renewals as renewals,	
-	itemext.item_id::text as item_id,
-	instext.instance_id::text as instance_id
+	circ.num_renewals as renewals	
 FROM folio_derived.instance_ext as instext
 	 LEFT JOIN folio_derived.instance_contributors AS authors ON instext.instance_id = authors.instance_id
 	 LEFT JOIN folio_derived.instance_publication AS pubdate ON instext.instance_id = pubdate.instance_id
@@ -54,21 +44,16 @@ FROM folio_derived.instance_ext as instext
      left join folio_derived.loans_renewal_count as circ on itemext.item_id = circ.item_id
 WHERE ll.library_name = 'UMKC Law Library' AND circ.num_loans > 0
 group by 
-	itemext.created_date,
-	instext.title,
 	itemext.barcode,
+    instext.title,
 	itemext.material_type_name,
     itemext.permanent_location_name,
-    itemext.permanent_loan_type_name,
     itemext.effective_call_number,
     itemext.volume,
     itemext.copy_number,
-	itemext.status_name,
 	circ.num_loans,
 	circ.num_renewals,	
-	ll.library_name,
-	itemext.item_id,
-	instext.instance_id
+	ll.library_name
 $$
 LANGUAGE SQL
 STABLE
