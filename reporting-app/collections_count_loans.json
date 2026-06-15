@@ -1,6 +1,6 @@
 {
     "displayName": "Collections: Count loans",
-    "description": "Count loans",
+    "description": "Lists items with their loan counts for the reporting period and campus code",
     "instructions": "Enter parameters",
     "parameters": [
         {
