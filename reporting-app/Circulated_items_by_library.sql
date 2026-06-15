@@ -22,8 +22,8 @@ RETURNS TABLE(
     item_status text,
     loans bigint,
     renewals bigint,
-    item_id uuid,
-    instance_id uuid)
+    item_id text,
+    instance_id text)
 AS $$
 SELECT
 	itemext.created_date::date as created_date,
@@ -42,8 +42,8 @@ SELECT
 	circ.num_loans as loans,
 	circ.num_renewals as renewals,	
 	ll.library_name as library,
-	itemext.item_id as item_id,
-	instext.instance_id as instance_id
+	itemext.item_id::text as item_id,
+	instext.instance_id::text as instance_id
 FROM folio_derived.instance_ext as instext
 	 LEFT JOIN folio_derived.instance_contributors AS authors ON instext.instance_id = authors.instance_id
 	 LEFT JOIN folio_derived.instance_publication AS pubdate ON instext.instance_id = pubdate.instance_id
