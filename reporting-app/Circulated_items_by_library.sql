@@ -49,7 +49,7 @@ FROM folio_derived.instance_ext as instext
 	 LEFT JOIN folio_derived.instance_publication AS pubdate ON instext.instance_id = pubdate.instance_id
 	 LEFT JOIN folio_derived.holdings_ext AS he ON instext.instance_id = he.instance_id        
      LEFT JOIN folio_derived.locations_libraries AS ll ON he.permanent_location_id = ll.location_id       
-     LEFT JOIN folio_derived.item_ext AS itemext ON he.holdings_id = itemext.holdings_record_id
+     LEFT JOIN folio_derived.item_ext AS itemext ON he.id = itemext.holdings_record_id
      LEFT JOIN folio_inventory.item__t AS ii ON itemext.item_id = ii.id
      left join folio_derived.loans_renewal_count as circ on itemext.item_id = circ.item_id
 WHERE ll.library_name = 'UMKC Law Library' AND circ.num_loans > 0
