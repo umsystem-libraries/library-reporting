@@ -20,6 +20,12 @@
             "displayName": "Campus code",
             "type": "text",
             "required": false
+        },
+        {
+            "name": "stat_code",
+            "displayName": "Statistical code",
+            "type": "text",
+            "required": false
         }
     ]
 }
