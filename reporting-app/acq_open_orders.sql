@@ -23,7 +23,7 @@ AS $$
 SELECT 
 acq.po_acquisition_unit_name as acq_unit, 
 poline.title_or_package as title,
-po.date_ordered as date_ordered,
+po.date_ordered::date as date_ordered,
 cost.po_line_estimated_price as estimated_price,
 poline.selector as selector,
 fundname.fund_name as fund,
