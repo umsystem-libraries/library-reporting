@@ -38,6 +38,8 @@ AS $$
         inst.title,
         loc.name,
         mt.name
+    ORDER BY
+        loan_count desc
 $$
 LANGUAGE SQL
 STABLE
