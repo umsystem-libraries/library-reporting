@@ -26,11 +26,11 @@ AS $$
     LEFT JOIN folio_inventory.holdings_record__t h
         ON h.id = i.holdings_record_id
     LEFT JOIN folio_inventory.instance__t inst
-        ON inst.id = h.instanceid
+        ON inst.id = h.instance_id
     LEFT JOIN folio_inventory.location__t loc
-        ON loc.id = h.permanentlocationid
+        ON loc.id = h.permanent_location_id
     LEFT JOIN folio_inventory.material_type__t mt
-        ON mt.id = i.materialtypeid
+        ON mt.id = i.material_type_id
     WHERE start_date <= l.loan_date::date
       AND l.loan_date::date < end_date
     GROUP BY
