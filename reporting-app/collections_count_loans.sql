@@ -5,7 +5,7 @@ DROP FUNCTION IF EXISTS count_loans;
 CREATE OR REPLACE FUNCTION count_loans(
     start_date date DEFAULT '1000-01-01',
     end_date date DEFAULT '3000-01-01',
-    campus text default ''.
+    campus text default '',
     stat_code text default ''
 )
 RETURNS TABLE(
