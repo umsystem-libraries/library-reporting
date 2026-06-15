@@ -32,8 +32,9 @@ SELECT
 	string_agg (distinct authors.contributor_name,' | ') as contributors,
 	string_agg (distinct pubdate.date_of_publication, ' | ') as publication_dates,
 	itemext.barcode as barcode,
-	itemext.material_type_name as material_type,
+    ll.library_name as library,
     itemext.permanent_location_name as shelving_location,
+	itemext.material_type_name as material_type,
     itemext.permanent_loan_type_name as loan_type,
     itemext.effective_call_number as call_number,
     itemext.volume as volume,
@@ -41,7 +42,6 @@ SELECT
 	itemext.status_name as item_status,
 	circ.num_loans as loans,
 	circ.num_renewals as renewals,	
-	ll.library_name as library,
 	itemext.item_id::text as item_id,
 	instext.instance_id::text as instance_id
 FROM folio_derived.instance_ext as instext
