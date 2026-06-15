@@ -5,8 +5,7 @@ DROP FUNCTION IF EXISTS count_loans;
 CREATE OR REPLACE FUNCTION count_loans(
     start_date date DEFAULT '1000-01-01',
     end_date date DEFAULT '3000-01-01',
-    campus text default '',
-    stat_code text default ''
+    campus text default ''
 )
 RETURNS TABLE(
     barcode text,
@@ -37,7 +36,6 @@ AS $$
     WHERE start_date <= l.loan_date::date
       AND l.loan_date::date < end_date
       AND (campus is null or loc.name like campus || '%')
-      and (stat_code is null or stat.statistical_code = stat_code)
     GROUP BY
         i.barcode,
         inst.title,
