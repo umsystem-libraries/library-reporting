@@ -18,7 +18,7 @@ RETURNS TABLE(
     electronic_mat_type text,
     vendor text,
     po_line_number text,
-    date_received date)
+    date_received text)
 AS $$
 SELECT 
 acq.po_acquisition_unit_name as acq_unit, 
@@ -31,7 +31,7 @@ phys.pol_mat_type_name as physical_mat_type,
 er.pol_er_mat_type_name as electronic_mat_type,
 vendor.organization_name as vendor,
 poline.po_line_number,
-poline.receipt_date as date_received
+TO_CHAR(poline.receipt_date::date, 'YYYY-MM-DD') as date_received
 from folio_orders.po_line__t as poline
 	left join folio_derived.po_acq_unit_ids as acq on poline.purchase_order_id = acq.po_id
 	left join folio_orders.purchase_order__t as po on poline.purchase_order_id = po.id
