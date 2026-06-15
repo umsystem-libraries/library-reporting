@@ -54,6 +54,9 @@ group by
 	circ.num_loans,
 	circ.num_renewals,	
 	ll.library_name
+order by
+    itemext.permanent_location_name,
+    circ.num_loans desc
 $$
 LANGUAGE SQL
 STABLE
