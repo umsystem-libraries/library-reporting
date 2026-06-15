@@ -26,7 +26,7 @@ RETURNS TABLE(
     instance_id uuid)
 AS $$
 SELECT
-	cast (itemext.created_date as DATE) as created_date,
+	itemext.created_date::date as created_date,
 	instext.title as title,
 	--These functions put all the unique authors and publication dates into the same cell
 	string_agg (distinct authors.contributor_name,' | ') as contributors,
