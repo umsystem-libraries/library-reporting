@@ -24,7 +24,7 @@ AS $$
     LEFT JOIN folio_inventory.item__t i
         ON i.id = l.item_id::uuid
     LEFT JOIN folio_inventory.holdings_record__t h
-        ON h.id = i.holdingsrecordid
+        ON h.id = i.holdings_record_id
     LEFT JOIN folio_inventory.instance__t inst
         ON inst.id = h.instanceid
     LEFT JOIN folio_inventory.location__t loc
