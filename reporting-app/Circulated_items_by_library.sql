@@ -5,6 +5,7 @@
 DROP FUNCTION IF EXISTS circulated_items;
 
 CREATE FUNCTION circulated_items(
+    library text DEFAULT ''
 )
 RETURNS TABLE(
     library text,
@@ -42,7 +43,7 @@ FROM folio_derived.instance_ext as instext
      LEFT JOIN folio_derived.item_ext AS itemext ON he.id = itemext.holdings_record_id
      LEFT JOIN folio_inventory.item__t AS ii ON itemext.item_id = ii.id
      left join folio_derived.loans_renewal_count as circ on itemext.item_id = circ.item_id
-WHERE ll.library_name = 'UMKC Law Library' AND circ.num_loans > 0
+WHERE ll.library_name = library AND circ.num_loans > 0
 group by 
 	itemext.barcode,
     instext.title,

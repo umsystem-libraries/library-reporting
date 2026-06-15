@@ -1,7 +1,13 @@
 {
     "displayName": "Circulated Items by Library",
     "description": "Items by selected library with at least 1 FOLIO loan.",
-    "instructions": [],
+    "instructions": "Enter library name exactly as it appears in FOLIO Settings.",
     "parameters": [
+        {
+            "name": "library",
+            "displayName": "Library",
+            "type": "text",
+            "required": false
+         }
     ]
 }
