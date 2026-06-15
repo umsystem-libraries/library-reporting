@@ -7,12 +7,12 @@ DROP FUNCTION IF EXISTS circulated_items;
 CREATE FUNCTION circulated_items(
 )
 RETURNS TABLE(
+    library text,
+    shelving_location text,
     barcode text,
     title text,
     contributors text,
     publication_dates text,
-    library text,
-    shelving_location text,
     material_type text,
     call_number text,
     volume text,
@@ -21,13 +21,13 @@ RETURNS TABLE(
     renewals bigint)
 AS $$
 SELECT
-	itemext.barcode as barcode,
+	ll.library_name as library,
+    itemext.permanent_location_name as shelving_location,
+    itemext.barcode as barcode,
     instext.title as title,
 	--These functions put all the unique authors and publication dates into the same cell
 	string_agg (distinct authors.contributor_name,' | ') as contributors,
 	string_agg (distinct pubdate.date_of_publication, ' | ') as publication_dates,
-    ll.library_name as library,
-    itemext.permanent_location_name as shelving_location,
 	itemext.material_type_name as material_type,
     itemext.effective_call_number as call_number,
     itemext.volume as volume,
