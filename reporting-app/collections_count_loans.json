@@ -1,5 +1,5 @@
 {
-    "displayName": "Collections: Items with loan counts by reporting period",
+    "displayName": "Collections: Items with Loan Counts by Reporting Period and Campus",
     "description": "Lists items with their loan counts for the reporting period and campus code",
     "instructions": "Enter parameters",
     "parameters": [
