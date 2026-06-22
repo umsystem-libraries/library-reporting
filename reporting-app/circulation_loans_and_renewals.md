@@ -1,4 +1,4 @@
-# Count loans and renewals
+# Circulation loans and renewals
 
 ## Report details
 

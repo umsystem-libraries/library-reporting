@@ -1,5 +1,5 @@
 {
-    "displayName": "Count loans and renewals",
+    "displayName": "Circulation: Loans and Renewals",
     "description": "This report can be used to satisfy a need for annual statistics showing total loans and renewals by location.  The report itself returns each loan record, with information about the item locations, material type, loan policy, loan type, and loan status.  To summarize loans and renewals for different subsets of the data, add up the loans and renewals columns for the subsets.",
     "instructions": "Choose a start and end date for the loans period, and specify items_permanent_location_filter, items_temporary_location_filter, or items_temporary_location_filter to filter by location; institution_filter, campus_filter, and library_filter connect to the item's permanent location.",
     "parameters": [
