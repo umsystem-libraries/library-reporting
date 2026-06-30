@@ -10,3 +10,7 @@ MetaDB queries for cataloging reports.
 
 ## SearchMARCsubfield.sql
 - Search a MARC subfield for specific content.
+
+## Holdingsitemlocationmismatch.sql
+- Generates a list of items in which the item permanent location does not match the holdings permanent location.
+##
