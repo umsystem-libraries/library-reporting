@@ -26,7 +26,7 @@ FROM folio_derived.instance_ext as instext
 	 LEFT JOIN folio_derived.instance_publication AS pubdate ON instext.instance_id = pubdate.instance_id
 	 LEFT JOIN folio_derived.holdings_ext AS he ON instext.instance_id = he.instance_id        
      LEFT JOIN folio_derived.locations_libraries AS ll ON he.permanent_location_id = ll.location_id       
-     LEFT JOIN folio_derived.item_ext AS itemext ON he.holdings_id = itemext.holdings_record_id
+     LEFT JOIN folio_derived.item_ext AS itemext ON he.id = itemext.holdings_record_id
      LEFT JOIN folio_inventory.item__t AS ii ON itemext.item_id = ii.id
      left join folio_derived.instance_formats as instfmt on instext.instance_id = instfmt.instance_id
      left join folio_derived.item_statistical_codes as stat on itemext.item_id = stat.item_id
