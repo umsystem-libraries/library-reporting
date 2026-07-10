@@ -15,7 +15,7 @@ SELECT
 --	li.loan_status
 from folio_derived.instance_ext as instext
     LEFT JOIN folio_derived.holdings_ext AS he ON instext.instance_id = he.instance_id
-    LEFT JOIN folio_derived.item_ext AS ie ON he.holdings_id = ie.holdings_record_id     
+    LEFT JOIN folio_derived.item_ext AS ie ON he.id = ie.holdings_record_id     
 	LEFT JOIN folio_derived.loans_items AS li ON ie.item_id = li.item_id and li.loan_date > DATE '2023-01-01'
 	left join folio_derived.locations_libraries as ll on ie.permanent_location_id = ll.location_id 
 where ll.library_code = 'CENGR' 
