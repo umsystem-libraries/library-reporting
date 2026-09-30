@@ -1,0 +1,49 @@
+drop table um_reporting.dashboard_weeding_list;
+create table um_reporting.dashboard_weeding_list as 
+
+SELECT 
+	
+instext.instance_hrid as "Instance HRID",
+instext.title as "Title",
+ --string_agg (distinct contributors.contributor_name, '|') as contributor_name,
+--string_agg (concat(contributors.contributor_name), '|') as "Contributor",
+ii.effective_shelving_order as "Item Effective Shelving Order",
+ie.effective_call_number as "Item Effective Call Number",
+ie.item_hrid as "Item HRID",
+ie.barcode as "Item Barcode",
+ie.volume as "Volume",
+ie.copy_number as "Copy",
+ie.permanent_location_name as "Item Permanent Location",
+ie.status_name as "Item Status",
+ie.material_type_name as "Item Material Type",
+ie.permanent_loan_type_name as "Item Permanent Loan Type",
+COUNT(li.loan_id) as "Number of Loans",
+coalesce(SUM(li.renewal_count), 0) as "Number of Renewals",
+MAX(li.loan_date) AS "Last Loan Date",
+MAX(li.loan_return_date) as "Last Return Date",
+ll.campus_name as "Campus Name",
+ll.library_name as "Library"
+
+from folio_derived.instance_ext as instext
+    LEFT JOIN folio_derived.holdings_ext AS he ON instext.instance_id = he.instance_id
+    LEFT JOIN folio_derived.item_ext AS ie ON he.id = ie.holdings_record_id 
+    LEFT JOIN folio_inventory.item__t AS ii ON ie.item_id = ii.id
+	LEFT JOIN folio_derived.loans_items AS li ON ie.item_id = li.item_id and li.loan_date > DATE '2022-06-01'
+	left join folio_derived.locations_libraries as ll on ie.permanent_location_id = ll.location_id 
+	--left join folio_derived.instance_contributors as contributors on instext.instance_id = contributors.instance_id
+
+group by 
+instext.instance_hrid,
+instext.title,
+ii.effective_shelving_order,
+ie.effective_call_number,
+ie.item_hrid,
+ie.barcode,
+ie.volume,
+ie.copy_number,
+ie.permanent_location_name,
+ie.status_name,
+ie.material_type_name,
+ie.permanent_loan_type_name,
+ll.campus_name,
+ll.library_name
