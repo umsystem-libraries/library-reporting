@@ -1,0 +1,68 @@
+drop table um_reporting.dashboard_holdings_count;
+create table um_reporting.dashboard_holdings_count as 
+
+select
+	ll.campus_name as "Campus",
+	ll.library_name as "Library",
+    itemext.permanent_location_name as "Item Permanent Location",
+    itemext.effective_location_name as "Item Effective Location",
+    itemext.barcode as "Item Barcode",
+	itemext.material_type_name as "Material Type",
+	itemext.effective_call_number as "Item Effective Call Number",
+	ii.effective_shelving_order as "Item Effective Shelving Order",
+	he.id as "Holdings UUID",
+	he.holdings_hrid as "Holdings HRID",
+	he.call_number as "Holdings Call Number",
+	he.permanent_location_name as "Holdings Permanent Location",
+	he.type_name as "Holdings Type",
+	instext.mode_of_issuance_name as "Mode of Issuance",
+	instfmt.instance_format_name as "Instance Format",
+	instext.type_name as "Instance Type",
+	instext.title as "Title",
+	instext.record_created_date as "Record Created Date",
+	itemext.item_id as "Item UUID",
+	itemext.item_hrid as "Item HRID",
+	itemext.permanent_loan_type_name as "Permanent Loan Type",
+	instext.instance_id as "Instance UUID",
+	instext.instance_hrid as "Instance HRID",
+	itemext.status_name as "Item Status",
+	itemext.created_date as "Item Created Date",
+	count(distinct he.id) as "Number of Holdings"
+
+	from folio_derived.instance_ext as instext
+     LEFT JOIN folio_derived.holdings_ext AS he ON instext.instance_id = he.instance_id        
+     LEFT JOIN folio_derived.locations_libraries AS ll ON he.permanent_location_id = ll.location_id       
+     LEFT JOIN folio_derived.item_ext AS itemext ON he.id = itemext.holdings_record_id
+     LEFT JOIN folio_inventory.item__t AS ii ON itemext.item_id = ii.id
+     left join folio_derived.instance_formats as instfmt on instext.instance_id = instfmt.instance_id
+where
+	itemext.barcode is not null	
+
+group by 
+
+	he.id,
+	he.holdings_hrid,
+	he.call_number,
+	he.permanent_location_name,
+	he.type_name,
+	instext.mode_of_issuance_name,
+	instfmt.instance_format_name,
+	instext.type_name,
+	instext.title,
+	instext.record_created_date,
+	itemext.effective_call_number,
+	ii.effective_shelving_order,
+	itemext.item_id,
+	itemext.item_hrid,
+	itemext.permanent_loan_type_name,
+	instext.instance_id,
+	instext.instance_hrid,
+	itemext.status_name,
+	itemext.created_date ,
+    itemext.permanent_location_name,
+    itemext.effective_location_name,
+    itemext.barcode,
+	itemext.material_type_name,
+	ll.campus_name,
+	ll.library_name
+	
