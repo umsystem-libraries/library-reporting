@@ -1,0 +1,69 @@
+drop table um_reporting.mobius_borrowing_item_information;
+create table um_reporting.mobius_borrowing_item_information as
+select
+dcb.item_title as "Title",
+dcb.item_barcode as "Item Barcode",
+dcb.id as "DCB ID",
+dcb.item_id as "DCB Item ID",
+dcb.status as "DCB Status",
+dcb.patron_group as "DCB Patron Group",
+dcb.lending_library_code as "Lending Library Code",
+dcb.service_point_name as "DCB Service Point Name",
+dcb.request_id as "Request ID",
+dcb.created_date as "DCB Created Date",
+li.checkout_service_point_name as "Checkout Service Point Name",
+li.loan_status as "Loan Status",
+li.loan_date as "Loan Date",
+li.loan_due_date as "Loan Due Date",
+li.item_status as "FOLIO Item Status",
+li.loan_policy_name as "Loan Policy Name",
+li.loan_id as "Loan UUID",
+li.item_id as "Item UUID",
+COUNT(li.loan_id) as "Number of Loans"
+
+FROM    folio_derived.loans_items AS li
+	left join folio_dcb.transactions__ as dcb on li.item_id = dcb.item_id
+	--left join folio_derived.requests_items as requests on li.item_id = requests.item_id
+where
+li.loan_date > '2024/06/01'
+and
+--item_effective_location_name_at_check_out = 'DCB'
+li.loan_policy_id in 
+('20089da7-b341-4879-9d60-565dad362889',
+'52f76109-220c-4ae9-88a9-cc4aaf8aa1ac',
+'5cfec64e-5ef9-4315-9718-f73d8c1f2aa6',
+'8a9627af-49ba-48ca-9950-9a71ebdfecaf',
+'9e1c35e4-38f0-4b7c-9e4c-368795079538',
+'82858ba5-2a82-4b7d-9fa3-943014b08039',
+'65f2394e-4fe9-4bf1-ac24-f5e21e774d10',
+'6d425e2c-7a84-4962-9b22-9372e7d0427c',
+'49e2e16c-7045-435b-9351-30724abf8f72',
+'8426ce7d-d066-4db9-978e-9aa0a199a870',
+'2ca768dd-1a62-4de9-a8db-9ea83263e864',
+'77de7003-c90c-4ab7-9be1-5c855b9c4f13',
+'82eda6f4-282e-4ed7-83e7-d0561946342b'
+)
+
+
+
+
+group by
+dcb.created_date,
+dcb.item_title,
+dcb.item_barcode,
+dcb.id,
+dcb.item_id,
+dcb.patron_group,
+dcb.lending_library_code,
+dcb.service_point_name,
+dcb.request_id,
+dcb.status,
+li.checkout_service_point_name,
+li.loan_status,
+li.loan_date,
+li.loan_due_date,
+li.item_status,
+li.loan_policy_name,
+li.loan_id,
+li.item_id
+
