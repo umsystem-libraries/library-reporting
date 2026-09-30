@@ -1,0 +1,53 @@
+drop table um_reporting.mobius_lending_item_information;
+create table um_reporting.mobius_lending_item_information as
+
+select
+li.loan_date as "Loan Date",
+ie.effective_call_number as "Item Effective Call Number",
+instext.title as "Title",
+ie.barcode as "Item Barcode",
+ie.status_name as "Item Status",
+li.patron_group_name as "Patron Group",
+ie.permanent_location_name as "Item Permanent Location",
+li.checkout_service_point_name as "Checkout Service Point",
+ie.material_type_name as "Item Material Type",
+ie.permanent_loan_type_name as "Item Loan Type",
+li.loan_status as "Loan Status",
+li.loan_due_date as "Loan Due Date",
+li.loan_policy_name as "Loan Policy",
+li.loan_id as "Loan UUID",
+li.item_id as "Item UUID",
+ll.campus_name as "Campus",
+ll.library_name as "Library",
+COUNT(loan_id) as "Number of Loans"
+
+from folio_derived.instance_ext as instext
+    LEFT JOIN folio_derived.holdings_ext AS he ON instext.instance_id = he.instance_id
+    LEFT JOIN folio_derived.item_ext AS ie ON he.id = ie.holdings_record_id     
+	LEFT JOIN folio_derived.loans_items AS li ON ie.item_id = li.item_id
+	left join folio_derived.locations_libraries as ll on ie.permanent_location_id = ll.location_id
+	
+WHERE 
+li.checkout_service_point_name like '%DCB%'
+
+
+
+
+group by
+li.loan_date,
+ie.effective_call_number,
+instext.title,
+ie.barcode,
+ie.status_name,
+li.patron_group_name,
+ie.permanent_location_name,
+li.checkout_service_point_name,
+ie.material_type_name,
+ie.permanent_loan_type_name,
+li.loan_status,
+li.loan_due_date,
+li.loan_policy_name,
+li.loan_id,
+li.item_id,
+ll.campus_name,
+ll.library_name 
